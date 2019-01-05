@@ -42,7 +42,7 @@
                                          
                                     </v-layout>
                                     <v-divider> </v-divider>
-                                    <v-layout  v-for="(item) in myMenu" :key="item">
+                                    <v-layout  v-for="(item,idx) in myMenu" :key="idx">
                                         <v-flex md3>{{item.name}}  </v-flex>
                                         <v-flex md2>{{item.price}}  </v-flex>
                                         <v-flex md2> {{item.amount}}</v-flex>
@@ -127,8 +127,32 @@ export default{
          
     },
     methods:{
-        submit(){
-            alert("Go to Line Pay");            
+        async submit(){
+           
+            let url = process.env.LinePay_Url+"/v2/payments/request";
+
+            let payload = {
+                productName: "Live meat",
+                amount: 10,
+                orderId: "1234xxxaaa",
+                currency: 'THB',
+                confirmUrl: process.env.HEROKU_URL+"/confirmPayment",
+                langCd : 'th',
+                confirmUrlType: 'SERVER'
+            };
+
+            let reqReserve = await this.$axios.post('https://sandbox-api-pay.line.me/v2/payments/request', payload, {
+                headers: {
+                    'X-LINE-ChannelId' : process.env.LinePay_ChannelID,
+                    'X-LINE-ChannelSecret' : process.env.LinePay_SecretKey,
+                    'Content-Type' : 'application/json',
+                }
+                }
+            )
+            console.log(reqReserve);
+
+            
+            alert(reqReserve);
         },
         reset(){
             
