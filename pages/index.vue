@@ -140,7 +140,7 @@ export default{
                 langCd : 'th',
                 confirmUrlType: 'SERVER'
             };
-
+            /*
             let reqReserve = await this.$axios.post('https://sandbox-api-pay.line.me/v2/payments/request', payload, {
                 headers: {
                     'X-LINE-ChannelId' : process.env.LinePay_ChannelID,
@@ -149,6 +149,22 @@ export default{
                 }
                 }
             )
+            */
+           let reqReserve = await this.$axios.post('https://sandbox-api-pay.line.me/v2/payments/request', payload, {
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://nuxt-linepay.herokuapp.com/',
+                    'Access-Control-Allow-Methods':  'POST',
+                    'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
+                    'Access-Control-Allow-Credentials': true,
+
+                    'X-LINE-ChannelId' : '1632513723',
+                    'X-LINE-ChannelSecret' : '9465048e7538c63e3be0655c6aa24d71',
+                    'Content-Type' : 'application/json',
+                    
+                    
+                }
+                }
+            );
             console.log(reqReserve);
 
             
