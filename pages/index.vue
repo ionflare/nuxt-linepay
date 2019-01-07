@@ -100,8 +100,8 @@ export default{
     data(){
      return  {
             myMenu:[
-                { name : "Capuchino", abbreviation : "CA", price : 60 , amount : 0, totalPrice: 0},
-                { name : "Late", abbreviation : "LA", price : 70 , amount : 0 , totalPrice: 0},
+                { name : "Cappuccino", abbreviation : "CA", price : 60 , amount : 0, totalPrice: 0},
+                { name : "Latte", abbreviation : "LA", price : 70 , amount : 0 , totalPrice: 0},
                 { name : "Expresso", abbreviation : "EX", price : 80 , amount : 0, totalPrice: 0},
                 { name : "Americano", abbreviation : "AM", price : 100 , amount : 0, totalPrice: 0},]
 
