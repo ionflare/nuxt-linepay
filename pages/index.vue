@@ -66,7 +66,7 @@
                                      <v-divider> </v-divider>
                                      <v-layout  justify-center  align-center>
                                         <v-flex md3>
-                                            <v-btn color="green" @click="submit()">Submit</v-btn>
+                                            <v-btn color="green" @click="submit()">Line PAY</v-btn>
                                              <v-btn color="red" @click="reset()">Reset</v-btn>
                                         </v-flex>
                                         
@@ -100,10 +100,10 @@ export default{
     data(){
      return  {
             myMenu:[
-                { name : "Capuchino", price : 60 , amount : 0, totalPrice: 0},
-                { name : "Late", price : 70 , amount : 0 , totalPrice: 0},
-                { name : "Expresso", price : 80 , amount : 0, totalPrice: 0},
-                { name : "Americano", price : 100 , amount : 0, totalPrice: 0},]
+                { name : "Capuchino", abbreviation : "CA", price : 60 , amount : 0, totalPrice: 0},
+                { name : "Late", abbreviation : "LA", price : 70 , amount : 0 , totalPrice: 0},
+                { name : "Expresso", abbreviation : "EX", price : 80 , amount : 0, totalPrice: 0},
+                { name : "Americano", abbreviation : "AM", price : 100 , amount : 0, totalPrice: 0},]
 
         } 
            
@@ -128,47 +128,21 @@ export default{
     },
     methods:{
         async submit(){
-           
-            let url = process.env.LinePay_Url+"/v2/payments/request";
-
-            let payload = {
-                productName: "Live meat",
-                amount: 10,
-                orderId: "1234xxxaaa",
-                currency: 'THB',
-                confirmUrl: process.env.HEROKU_URL+"/confirmPayment",
-                langCd : 'th',
-                confirmUrlType: 'SERVER'
-            };
-            /*
-            let reqReserve = await this.$axios.post('https://sandbox-api-pay.line.me/v2/payments/request', payload, {
-                headers: {
-                    'X-LINE-ChannelId' : process.env.LinePay_ChannelID,
-                    'X-LINE-ChannelSecret' : process.env.LinePay_SecretKey,
-                    'Content-Type' : 'application/json',
-                }
-                }
-            )
-            */
-           let reqReserve = await this.$axios.post('https://sandbox-api-pay.line.me/v2/payments/request', payload, {
-                headers: {
-                    'Access-Control-Allow-Origin': 'https://nuxt-linepay.herokuapp.com/',
-                    'Access-Control-Allow-Methods':  'POST',
-                    'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-                    'Access-Control-Allow-Credentials': true,
-
-                    'X-LINE-ChannelId' : '1632513723',
-                    'X-LINE-ChannelSecret' : '9465048e7538c63e3be0655c6aa24d71',
-                    'Content-Type' : 'application/json',
-                    
-                    
-                }
-                }
-            );
-            console.log(reqReserve);
-
             
-            alert(reqReserve);
+            let data={};
+            data.myMenu = this.myMenu;
+            data.productImageUrl='https://reflectionsipc.files.wordpress.com/2017/07/aaeaaqaaaaaaaaxlaaaajdc5y2u4zddilwi3mjytndixos1intjklwi2mgu5zwvhm2ring1.jpg';
+            let reqReserve = await this.$axios.$post('/api/reservePayment', {data});
+            if(reqReserve.returnMessage == "Success.")
+            {
+                  location.href = reqReserve.info.paymentUrl.web;
+            }else{
+                //alert("An Error occurred while calling LinePay_researvePayment API!!!");
+                alert(reqReserve.returnMessage);
+            }
+          
+           
+         
         },
         reset(){
             
