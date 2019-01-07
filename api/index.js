@@ -26,7 +26,7 @@ app.post("/reservePayment",async(req,res)=>{
     for(i = 0; i< req.body.data.myMenu.length; i++)
     {
         if(req.body.data.myMenu[i].amount > 0)
-        {   reqProductName += req.body.data.myMenu[i].abbreviation+"("+ req.body.data.myMenu[i].amount+"), ";
+        {   reqProductName += req.body.data.myMenu[i].name+"("+ req.body.data.myMenu[i].amount+"), ";
             reqProductSum += (req.body.data.myMenu[i].amount* req.body.data.myMenu[i].price);
         }
     }
