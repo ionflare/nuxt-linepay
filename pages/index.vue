@@ -147,8 +147,8 @@ export default{
         reset(){
             
             this.myMenu = [
-                { name : "Capuchino", price : 60 , amount : 0, totalPrice: 0},
-                { name : "Late", price : 70 , amount : 0 , totalPrice: 0},
+                { name : "Cappuccino", price : 60 , amount : 0, totalPrice: 0},
+                { name : "Latte", price : 70 , amount : 0 , totalPrice: 0},
                 { name : "Expresso", price : 80 , amount : 0, totalPrice: 0},
                 { name : "Americano", price : 100 , amount : 0, totalPrice: 0},];
            
