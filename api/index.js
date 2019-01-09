@@ -37,7 +37,7 @@ app.post("/reservePayment",async(req,res)=>{
         productName: reqProductName,
         productImageUrl : req.body.data.productImageUrl,
         amount: reqProductSum,
-        orderId: reqProductName,
+        orderId: "order 210124213",
         currency: 'THB',
         confirmUrl: process.env.HEROKU_URL+"api/confirmPayment",
         langCd : 'en',
