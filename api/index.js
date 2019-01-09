@@ -36,8 +36,7 @@ app.post("/reservePayment",async(req,res)=>{
     let formData = {
         productName: reqProductName,
         productImageUrl : req.body.data.productImageUrl,
-        //amount: reqProductSum,
-        amount: 1,
+        amount: reqProductSum,
         orderId: "1234xxxaaa",
         currency: 'THB',
         confirmUrl: process.env.HEROKU_URL+"api/confirmPayment",
@@ -76,10 +75,8 @@ app.post("/reservePayment",async(req,res)=>{
 app.get("/confirmPayment",async(req,res)=>{
    
     let formData = {   
-        //amount: req.session.LinePay_amount,
-        //currency:  req.session.LinePay_currency,
-         amount: 1,
-        currency:  'THB',
+        amount: req.session.LinePay_amount,
+        currency:  req.session.LinePay_currency,
     };
 
    let url = process.env.LinePay_Url+"/v2/payments/"+req.params.transactionId+"/confirm";
@@ -97,11 +94,10 @@ app.get("/confirmPayment",async(req,res)=>{
     body: JSON.stringify(formData),
     },
     function (err, httpResponse, body) {
-        if(err)
-        {res.send(err);}
+       
         //console.log(err, body);
         //res.status(status).send(body)
-        else if(body.returnCode == "0000")
+        if(body.returnCode == "0000")
         {  res.send("Transaction is completed"); }
         else
         {res.send("Error Code : " + body.returnCode);  }
