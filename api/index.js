@@ -62,7 +62,7 @@ app.post("/reservePayment",async(req,res)=>{
         //console.log(err, body);
         //res.status(status).send(body);
         //res.send(body);
-        req.session.LinePay_amount = formData.reqProductSum;
+        req.session.LinePay_amount = formData.amount;
         req.session.LinePay_currency = formData.currency;
         res.send(body);
         //res.redirect(response.info.paymentUrl.web);
@@ -100,7 +100,7 @@ app.get("/confirmPayment",async(req,res)=>{
         if(body.returnCode == "0000")
         {  res.send("Transaction is completed"); }
         else
-        {res.send(req.session.LinePay_amount + "-" + req.session.LinePay_currency+ "-"+body);  }
+        {res.send(body);  }
        
     });
 
