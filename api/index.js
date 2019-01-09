@@ -82,7 +82,7 @@ app.get("/confirmPayment",async(req,res)=>{
    let url = process.env.LinePay_Url+"/v2/payments/"+req.params.transactionId+"/confirm";
    await request({
     method: 'POST',
-    uri:  url,
+    url:  url,
     headers: 
         {
             'Content-Type': 'application/json',
