@@ -74,7 +74,7 @@ app.post("/reservePayment",async(req,res)=>{
 
 app.get("/confirmPayment",async(req,res)=>{
    
-    let formData = {   
+    let formConfirm = {   
         amount: req.session.LinePay_amount,
         currency:  req.session.LinePay_currency,
     };
@@ -82,7 +82,7 @@ app.get("/confirmPayment",async(req,res)=>{
    let url = process.env.LinePay_Url+"/v2/payments/"+req.params.transactionId+"/confirm";
    await request({
     method: 'POST',
-    url:  url,
+    uri:  url,
     headers: 
         {
             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ app.get("/confirmPayment",async(req,res)=>{
         
         }
     ,
-    body: JSON.stringify(formData),
+    body: formConfirm,
     },
     function (err, httpResponse, body) {
        
