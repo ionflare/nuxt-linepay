@@ -75,6 +75,7 @@ app.post("/reservePayment",async(req,res)=>{
 app.get("/confirmPayment",async(req,res)=>{
    
     let formConfirm = {   
+        transactionId: req.params.transactionId,
         amount: req.session.LinePay_amount,
         currency:  'THB'
     };
