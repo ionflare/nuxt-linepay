@@ -75,8 +75,8 @@ app.post("/reservePayment",async(req,res)=>{
 app.get("/confirmPayment",async(req,res)=>{
    
     let formConfirm = {   
-        amount: Number(req.session.LinePay_amount),
-        currency:  req.session.LinePay_currency
+        amount: req.session.LinePay_amount,
+        currency:  'THB'
     };
 
    await request({
@@ -99,7 +99,7 @@ app.get("/confirmPayment",async(req,res)=>{
         if(body.returnCode == "0000")
         {  res.send("Transaction is completed"); }
         else
-        {res.send((req.session.LinePay_amount+9999) + "-" + req.session.LinePay_currency+ "-"+body);  }
+        {res.send(req.session.LinePay_amount + "-" + req.session.LinePay_currency+ "-"+body);  }
        
     });
 
