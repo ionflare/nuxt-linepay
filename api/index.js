@@ -100,7 +100,7 @@ app.get("/confirmPayment",async(req,res)=>{
         if(body.returnCode == "0000")
         {  res.send("Transaction is completed"); }
         else
-        {res.send("Error Code : " + body.returnCode);  }
+        {res.send(body);  }
        
     });
 
