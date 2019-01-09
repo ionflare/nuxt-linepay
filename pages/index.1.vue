@@ -145,13 +145,13 @@ export default{
          
         },
         reset(){
-            
-            this.myMenu = [
+            /*
+            this.myMenu      = [
                 { name : "Cappuccino", abbreviation : "CA", price : 60 , amount : 0, totalPrice: 0},
                 { name : "Latte", abbreviation : "LA", price : 70 , amount : 0 , totalPrice: 0},
                 { name : "Expresso", abbreviation : "EX", price : 80 , amount : 0, totalPrice: 0},
                 { name : "Americano", abbreviation : "AM", price : 100 , amount : 0, totalPrice: 0},];
-                
+                */
            
         },
         adaptWishList(item,isAdd){
@@ -169,11 +169,9 @@ export default{
     },
     mounted() {
     // LIFFの初期化
-    /*
     liff.init(function(data) {
       console.log(data)
     })
-    */
   },
 
 }

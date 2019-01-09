@@ -1,4 +1,5 @@
 const express = require('express');
+//const session = require('express-session')
 const app = express();
 const request = require('request');
 const cors = require('cors');
@@ -60,7 +61,11 @@ app.post("/reservePayment",async(req,res)=>{
         {console.log(err, body);}
         //console.log(err, body);
         //res.status(status).send(body);
+        //res.send(body);
+        req.session.LinePay_amount = formData.reqProductSum;
+        req.session.LinePay_currency = formData.currency;
         res.send(body);
+        //res.redirect(response.info.paymentUrl.web);
     }
 );
  });
@@ -68,8 +73,40 @@ app.post("/reservePayment",async(req,res)=>{
 
 
 app.get("/confirmPayment",async(req,res)=>{
-   await res.send("OK");
+   
+    let formData = {   
+        amount: req.session.LinePay_amount,
+        currency:  req.session.LinePay_currency,
+    };
+
+   let url = process.env.LinePay_Url+"/v2/payments/"+req.params.transactionId+"/confirm";
+   await request({
+    method: 'POST',
+    url:  url,
+    headers: 
+        {
+            'Content-Type': 'application/json',
+            'X-LINE-ChannelId' : process.env.LinePay_ChannelID,
+            'X-LINE-ChannelSecret' : process.env.LinePay_SecretKey,
+        
+        }
+    ,
+    body: JSON.stringify(formData),
+    },
+    function (err, httpResponse, body) {
+        if(err)
+        {res.send(err);}
+        //console.log(err, body);
+        //res.status(status).send(body)
+        else if(body.returnCode == "0000")
+        {  res.send("Transaction is completed"); }
+        else
+        {res.send("Error Code : " + body.returnCode);  }
+       
+    });
+
 });
+
 
 module.exports = {
     path: '/api',

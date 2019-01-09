@@ -30,7 +30,7 @@ module.exports = {
     ],
     
     loading: { color: "#FFFFFF" },
-    
+    script: [{ src: 'https://d.line-scdn.net/liff/1.0/sdk.js' }],
     plugins: [
     "@/plugins/vuetify",
     ],
