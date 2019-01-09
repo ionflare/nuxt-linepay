@@ -79,10 +79,9 @@ app.get("/confirmPayment",async(req,res)=>{
         currency:  req.session.LinePay_currency,
     };
 
-   let url = process.env.LinePay_Url+"/v2/payments/"+req.params.transactionId+"/confirm";
    await request({
     method: 'POST',
-    url:  url,
+    url:  process.env.LinePay_Url+"/v2/payments/"+req.params.transactionId+"/confirm",
     headers: 
         {
             'Content-Type': 'application/json',
@@ -91,7 +90,7 @@ app.get("/confirmPayment",async(req,res)=>{
         
         }
     ,
-    body: formConfirm,
+    body: JSON.stringify(formConfirm),
     },
     function (err, httpResponse, body) {
        
