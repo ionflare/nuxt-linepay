@@ -19,6 +19,26 @@ const config = {
 const client = new linebot.Client(config);
 */
 
+
+app.get("/getTime", async (req,res)=>{
+    let timeInMss = await genOrderId();
+    res.send(timeInMss);
+});
+
+
+function  genOrderId(){
+   
+    let rawDateTime = new Date();
+    let res1 = rawDateTime.toString().split(" ");
+    //let res2 = res1[0].split("-");
+    //ex ==> Thu Jan 10 2019 10:56:16 GMT+0700 (SE Asia Standard Time)
+    let resTime = res1[4].split(":");
+    let strResult = res1[3]+res1[2]+res1[1]+resTime[0]+resTime[1]+resTime[2];
+
+    return strResult;
+
+}
+
 app.post("/reservePayment",async(req,res)=>{
 
     let reqProductName = "";
@@ -33,11 +53,16 @@ app.post("/reservePayment",async(req,res)=>{
     }
     
     
+   
+   
+    let newOrderId = genOrderId();
+
+
     let formData = {
         productName: reqProductName,
         productImageUrl : req.body.data.productImageUrl,
         amount: reqProductSum,
-        orderId: "order 210124213",
+        orderId: newOrderId,
         currency: 'THB',
         confirmUrl: process.env.HEROKU_URL+"api/confirmPayment",
         langCd : 'en',

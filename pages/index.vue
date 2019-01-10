@@ -50,6 +50,7 @@
                                          <v-flex md3>
                                              <v-btn color="green" @click="adaptWishList(item,true)">+</v-btn>
                                              <v-btn color="red"  @click="adaptWishList(item,false)">-</v-btn>
+                                             
                                          </v-flex>
                                         
                                     </v-layout>
@@ -68,6 +69,7 @@
                                         <v-flex md3>
                                             <v-btn color="green" @click="submit()">Line PAY</v-btn>
                                              <v-btn color="red" @click="reset()">Reset</v-btn>
+                                             <v-btn color="blue"  @click="testGetTime()">Gettime</v-btn>
                                         </v-flex>
                                         
                                     </v-layout>
@@ -162,6 +164,9 @@ export default{
                 {item.amount--; }
              }
             item.totalPrice = item.amount*item.price;
+        },
+        testGetTime(){
+             location.href = '/api/getTime';
         }
 
         
