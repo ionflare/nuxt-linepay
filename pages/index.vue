@@ -70,6 +70,7 @@
                                             <v-btn color="green" @click="submit()">Line PAY</v-btn>
                                              <v-btn color="red" @click="reset()">Reset</v-btn>
                                              <v-btn color="blue"  @click="testGetTime()">Gettime</v-btn>
+                                             <v-btn color="yellow"  @click="getProfile()">GetLiffInfo</v-btn>
                                         </v-flex>
                                         
                                     </v-layout>
@@ -161,6 +162,16 @@ export default{
     },
     methods:{
 
+        getProfile() {
+            liff.getProfile().then((profile) => {
+                this.userId = profile.userId
+                this.displayName = profile.displayName
+                this.pictureUrl = profile.pictureUrl
+                this.statusMessage = profile.statusMessage
+            }).catch(function (error) {
+                alert("Error getting profile: " + error);
+            });
+        },
         
 
         async submit(){
