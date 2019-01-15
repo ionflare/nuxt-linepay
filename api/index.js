@@ -125,8 +125,6 @@ app.get("/confirmPayment",async(req,res)=>{
     body: JSON.stringify(formConfirm),
     },
     function (err, httpResponse, body) {
-        return client.pushMessage(req.session.userLineId,  { type: 'text', 
-        text: "Thank you for using our services." });
         /*
         if(body.returnCode == "0000")
         { 
@@ -153,6 +151,7 @@ app.get("/confirmPayment",async(req,res)=>{
             
         }
         */
+       return client.pushMessage(req.session.userLineId,  { type: 'text', text:  "Thank you for using our services." });
         
     });
 
