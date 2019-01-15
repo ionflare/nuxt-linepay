@@ -179,6 +179,7 @@ export default{
             let data={};
             data.myMenu = this.myMenu;
             data.productImageUrl='https://reflectionsipc.files.wordpress.com/2017/07/aaeaaqaaaaaaaaxlaaaajdc5y2u4zddilwi3mjytndixos1intjklwi2mgu5zwvhm2ring1.jpg';
+            data.userLineId = this.userId;
             let reqReserve = await this.$axios.$post('/api/reservePayment', {data});
             if(reqReserve.returnMessage == "Success.")
             {

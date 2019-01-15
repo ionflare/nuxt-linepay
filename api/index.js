@@ -3,21 +3,19 @@ const express = require('express');
 const app = express();
 const request = require('request');
 const cors = require('cors');
-
 app.use(cors());
 app.options('*', cors());
-/*
+
+
 const linebot = require('@line/bot-sdk');
-
-
 const config = {
     channelAccessToken:  process.env.LINE_MESSAGE_CHANNEL_ACCESS_TOKEN,
-     channelSecret: process.env.LINE_MESSAGE_CHANNEL_SECRET
+    channelSecret: process.env.LINE_MESSAGE_CHANNEL_SECRET
 };
-
 // create LINE SDK client
 const client = new linebot.Client(config);
-*/
+
+
 
 
 app.get("/getTime", async (req,res)=>{
@@ -59,6 +57,7 @@ app.post("/reservePayment",async(req,res)=>{
 
 
     let formData = {
+        
         productName: reqProductName,
         productImageUrl : req.body.data.productImageUrl,
         amount: reqProductSum,
@@ -87,6 +86,8 @@ app.post("/reservePayment",async(req,res)=>{
         //console.log(err, body);
         //res.status(status).send(body);
         //res.send(body);
+        req.session.orderList = reqProductName;
+        req.session.userLineId = req.body.data.userLineId; 
         req.session.LinePay_amount = reqProductSum;
         req.session.LinePay_currency = formData.currency;
         res.send(body);
@@ -119,14 +120,30 @@ app.get("/confirmPayment",async(req,res)=>{
     body: JSON.stringify(formConfirm),
     },
     function (err, httpResponse, body) {
-       
-        //console.log(err, body);
-        //res.status(status).send(body)
         if(body.returnCode == "0000")
-        {  res.send("Transaction is completed"); }
+        { 
+            if(req.session.userLineId != "")
+            {
+                return client.pushMessage(req.session.userLineId,  { type: 'text', 
+                text: "Thank you for using our services. Your order is " + req.session.orderList + ". Total : "+ 
+                req.session.LinePay_amount + req.session.LinePay_currency });
+            }
+            else
+            {
+                return res.send(req.session.LinePay_amount + "-" + req.session.LinePay_currency+ "-"+body);  
+            }
+        }
         else
-        {res.send(req.session.LinePay_amount + "-" + req.session.LinePay_currency+ "-"+body);  }
-       
+        {
+            if(req.session.userLineId != "")
+            {
+                return client.pushMessage(req.session.userLineId,  { type: 'text', text:  "Errors occured while booking. Code : "+ body.returnCode });
+            }else
+            {
+                return res.send(req.session.LinePay_amount + "-" + req.session.LinePay_currency+ "-"+body);  
+            }
+        }
+        
     });
 
 });
