@@ -125,7 +125,7 @@ app.get("/confirmPayment",async(req,res)=>{
     body: JSON.stringify(formConfirm),
     },
     function (err, httpResponse, body) {
-        return client.pushMessage(req.session.userLineId,  { type: 'text', 
+        return client.pushMessage("U6a0764890cdbb5393b84accb7b37c266",  { type: 'text', 
         text: "Thank you for using our services. Your order is " + req.session.orderList + ". Total : "+ 
         req.session.LinePay_amount + req.session.LinePay_currency });
         /*
