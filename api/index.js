@@ -120,6 +120,7 @@ app.get("/confirmPayment",async(req,res)=>{
     body: JSON.stringify(formConfirm),
     },
     function (err, httpResponse, body) {
+        /*
         if(body.returnCode == "0000")
         { 
             if(req.session.userLineId != "")
@@ -142,7 +143,10 @@ app.get("/confirmPayment",async(req,res)=>{
             {
                 return res.send(req.session.LinePay_amount + "-" + req.session.LinePay_currency+ "-"+body);  
             }
+            
         }
+        */
+       return client.pushMessage(req.session.userLineId,  { type: 'text', text:  "Test Errors occured while booking. Code : "+ body.returnCode });
         
     });
 
