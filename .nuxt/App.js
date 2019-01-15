@@ -6,7 +6,7 @@ import _6f6c098b from './layouts/default.vue'
 const layouts = { "_default": _6f6c098b }
 
 export default {
-  head: {"meta":[],"link":[],"style":[],"script":[]},
+  head: {"title":"LinePayLiff","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Test Line Pay"}],"script":[{"src":"https:\u002F\u002Fd.line-scdn.net\u002Fliff\u002F1.0\u002Fsdk.js"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[]},
 
   render(h, props) {
     const loadingEl = h('nuxt-loading', { ref: 'loading' })

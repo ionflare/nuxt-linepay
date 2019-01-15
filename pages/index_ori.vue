@@ -50,6 +50,7 @@
                                          <v-flex md3>
                                              <v-btn color="green" @click="adaptWishList(item,true)">+</v-btn>
                                              <v-btn color="red"  @click="adaptWishList(item,false)">-</v-btn>
+                                             
                                          </v-flex>
                                         
                                     </v-layout>
@@ -68,6 +69,7 @@
                                         <v-flex md3>
                                             <v-btn color="green" @click="submit()">Line PAY</v-btn>
                                              <v-btn color="red" @click="reset()">Reset</v-btn>
+                                             <v-btn color="blue"  @click="testGetTime()">Gettime</v-btn>
                                         </v-flex>
                                         
                                     </v-layout>
@@ -145,13 +147,13 @@ export default{
          
         },
         reset(){
-            /*
-            this.myMenu      = [
+            
+            this.myMenu = [
                 { name : "Cappuccino", abbreviation : "CA", price : 60 , amount : 0, totalPrice: 0},
                 { name : "Latte", abbreviation : "LA", price : 70 , amount : 0 , totalPrice: 0},
                 { name : "Expresso", abbreviation : "EX", price : 80 , amount : 0, totalPrice: 0},
                 { name : "Americano", abbreviation : "AM", price : 100 , amount : 0, totalPrice: 0},];
-                */
+                
            
         },
         adaptWishList(item,isAdd){
@@ -162,6 +164,9 @@ export default{
                 {item.amount--; }
              }
             item.totalPrice = item.amount*item.price;
+        },
+        testGetTime(){
+             location.href = '/api/getTime';
         }
 
         
@@ -169,9 +174,11 @@ export default{
     },
     mounted() {
     // LIFFの初期化
+    /*
     liff.init(function(data) {
       console.log(data)
     })
+    */
   },
 
 }

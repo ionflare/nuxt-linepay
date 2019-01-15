@@ -1,7 +1,7 @@
 <template>
 <v-app id="inspire" >
     <v-toolbar color="green" dark fixed app>
-      <v-toolbar-title>My Shop</v-toolbar-title>
+      <v-toolbar-title>My Shop {{userId}}</v-toolbar-title>
     </v-toolbar>
     <v-content >
       <v-container fluid fill-height >
@@ -99,8 +99,23 @@
 
 <script>
 export default{
+    mounted() {
+    // LIFFの初期化
+    
+    liff.init(function(data) {
+      console.log(data)
+    })
+    
+    },
+
+
+
     data(){
      return  {
+            userId: '',
+            displayName: '',
+            pictureUrl: 'https://bulma.io/images/placeholders/128x128.png',
+            statusMessage: '',
             myMenu : [
                 { name : "Cappuccino", abbreviation : "CA", price : 60 , amount : 0, totalPrice: 0},
                 { name : "Latte", abbreviation : "LA", price : 70 , amount : 0 , totalPrice: 0},
@@ -112,6 +127,20 @@ export default{
         
     },
     computed:{
+
+
+        liffGetUserInfo: function(){
+            liff.getProfile().then((profile) => {
+            this.userId = profile.userId
+            this.displayName = profile.displayName
+            this.pictureUrl = profile.pictureUrl
+            this.statusMessage = profile.statusMessage
+            }).catch(function (error) {
+                alert("Error getting profile: " + error);
+            });
+        },
+
+
         sumAmount: function(){
             let sumAmount = 0;
             this.myMenu.forEach(element => {
@@ -129,6 +158,9 @@ export default{
          
     },
     methods:{
+
+        
+
         async submit(){
             
             let data={};
@@ -172,14 +204,7 @@ export default{
         
 
     },
-    mounted() {
-    // LIFFの初期化
-    /*
-    liff.init(function(data) {
-      console.log(data)
-    })
-    */
-  },
+    
 
 }
 </script>
