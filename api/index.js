@@ -7,13 +7,17 @@ app.use(cors());
 app.options('*', cors());
 
 
-const linebot = require('@line/bot-sdk');
+const Client  = require('@line/bot-sdk');\/*
 const config = {
     channelAccessToken:  process.env.LINE_MESSAGE_CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.LINE_MESSAGE_CHANNEL_SECRET
 };
+*/
 // create LINE SDK client
-const client = new linebot.Client(config);
+const client = new Client({
+    channelAccessToken:  process.env.LINE_MESSAGE_CHANNEL_ACCESS_TOKEN,
+    channelSecret: process.env.LINE_MESSAGE_CHANNEL_SECRET
+  });
 
 
 
@@ -146,7 +150,7 @@ app.get("/confirmPayment",async(req,res)=>{
             
         }
         */
-       return client.pushMessage(req.session.userLineId,  { type: 'text', text:  "Test Errors occured while booking. Code : "+ body.returnCode });
+       return client.pushMessage("U6a0764890cdbb5393b84accb7b37c266",  { type: 'text', text:  "Test Errors occured while booking. Code : " });
         
     });
 
