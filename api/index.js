@@ -151,7 +151,8 @@ app.get("/confirmPayment",async(req,res)=>{
             
         }
         */
-       return client.pushMessage(req.session.userLineId,  { type: 'text', text:  "Thank you for using our services." });
+       return client.pushMessage("U6a0764890cdbb5393b84accb7b37c266",  { type: 'text', text:  "Thank you for using our services." 
+       +  req.session.LinePay_amount + req.session.LinePay_currency});
         
     });
 
