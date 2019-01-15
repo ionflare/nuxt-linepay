@@ -7,7 +7,8 @@ app.use(cors());
 app.options('*', cors());
 
 
-const Client  = require('@line/bot-sdk');\/*
+const Client  = require('@line/bot-sdk');
+/*
 const config = {
     channelAccessToken:  process.env.LINE_MESSAGE_CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.LINE_MESSAGE_CHANNEL_SECRET
