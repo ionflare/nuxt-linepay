@@ -102,9 +102,18 @@ export default{
     mounted() {
     // LIFFの初期化
     
-    liff.init(function(data) {
-      console.log(data)
-    })
+        liff.init(function(data) {
+        //console.log(data)
+            liff.getProfile().then((profile) => {
+            this.userId = profile.userId
+            this.displayName = profile.displayName
+            this.pictureUrl = profile.pictureUrl
+            this.statusMessage = profile.statusMessage
+            }).catch(function (error) {
+                alert("Error getting profile: " + error);
+            });
+        })
+        
     
     },
 
@@ -130,14 +139,7 @@ export default{
 
 
         liffGetUserInfo: function(){
-            liff.getProfile().then((profile) => {
-            this.userId = profile.userId
-            this.displayName = profile.displayName
-            this.pictureUrl = profile.pictureUrl
-            this.statusMessage = profile.statusMessage
-            }).catch(function (error) {
-                alert("Error getting profile: " + error);
-            });
+            
         },
 
 
