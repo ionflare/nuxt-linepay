@@ -126,6 +126,7 @@ app.get("/confirmPayment",async(req,res)=>{
     },
     function (err, httpResponse, body) {
         
+        /*
         if(body.returnCode == "0000")
         { 
             if(req.session.userLineId != "undefined" && req.session.userLineId != "")
@@ -143,17 +144,17 @@ app.get("/confirmPayment",async(req,res)=>{
         {
             if(req.session.userLineId != "undefined" && req.session.userLineId != "")
             {
-                return client.pushMessage("U6a0764890cdbb5393b84accb7b37c266",  { type: 'text', text:  "Errors occured while booking. Code : "+ body.returnCode });
+                return client.pushMessage("U6a0764890cdbb5393b84accb7b37c266",  { type: 'text', text:  "Errors occured while booking. Info : "+ body });
             }else
             {
                 return res.send(req.session.LinePay_amount + "-" + req.session.LinePay_currency+ "-"+body);  
             }
             
         }
-        /*
-       return client.pushMessage(req.session.userLineId,  { type: 'text', text:  "Thank you for using our services." 
-       +  req.session.LinePay_amount + req.session.LinePay_currency});
-       */
+        */
+       return client.pushMessage("U6a0764890cdbb5393b84accb7b37c266",  { type: 'text', text:  "Thank you for using our services." 
+       +  req.session.LinePay_amount + req.session.LinePay_currency + req.session.userLineId + body});
+       
         
     });
 
