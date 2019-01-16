@@ -111,7 +111,7 @@ app.get("/confirmPayment",async(req,res)=>{
         currency:  req.session.LinePay_currency
     };
 
-   await request({
+    request({
     method: 'POST',
     url:  process.env.LinePay_Url+"v2/payments/"+req.query.transactionId+"/confirm",
     headers: 
