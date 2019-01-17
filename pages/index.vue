@@ -7,7 +7,6 @@
       <v-container fluid fill-height >
         <v-layout
           justify-center
-           
         >
          <v-flex>
                <v-card color="orange">
@@ -69,8 +68,6 @@
                                         <v-flex md3>
                                             <v-btn color="green" @click="submit()">Line PAY</v-btn>
                                              <v-btn color="red" @click="reset()">Reset</v-btn>
-                                             <v-btn color="blue"  @click="testGetTime()">Gettime</v-btn>
-                                             <v-btn color="yellow"  @click="getProfile()">GetLiffInfo</v-btn>
                                         </v-flex>
                                         
                                     </v-layout>
@@ -93,7 +90,7 @@
       </v-container>
     </v-content>
     <v-footer color="green" app inset>
-      <span class="white--text">&copy; 2017</span>
+      <span class="white--text">&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
