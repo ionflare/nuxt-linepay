@@ -1,7 +1,7 @@
 <template>
 <v-app id="inspire" >
     <v-toolbar color="green" dark fixed app>
-      <v-toolbar-title>My Shop {{userId}}</v-toolbar-title>
+      <v-toolbar-title>My Shop</v-toolbar-title>
     </v-toolbar>
     <v-content >
       <v-container fluid fill-height >
@@ -100,32 +100,10 @@
 
 <script>
 export default{
-    mounted() {
-    // LIFFの初期化
     
-        liff.init(function(data) {
-        //console.log(data)
-            liff.getProfile().then((profile) => {
-            this.userId = profile.userId
-            this.displayName = profile.displayName
-            this.pictureUrl = profile.pictureUrl
-            this.statusMessage = profile.statusMessage
-            }).catch(function (error) {
-                alert("Error getting profile: " + error);
-            });
-        })
-        
-    
-    },
-
-
 
     data(){
      return  {
-            userId: '',
-            displayName: '',
-            pictureUrl: 'https://bulma.io/images/placeholders/128x128.png',
-            statusMessage: '',
             myMenu : [
                 { name : "Cappuccino", abbreviation : "CA", price : 60 , amount : 0, totalPrice: 0},
                 { name : "Latte", abbreviation : "LA", price : 70 , amount : 0 , totalPrice: 0},
@@ -137,13 +115,6 @@ export default{
         
     },
     computed:{
-
-
-        liffGetUserInfo: function(){
-            
-        },
-
-
         sumAmount: function(){
             let sumAmount = 0;
             this.myMenu.forEach(element => {
@@ -162,30 +133,18 @@ export default{
     },
     methods:{
 
-        getProfile() {
-            liff.getProfile().then((profile) => {
-                this.userId = profile.userId
-                this.displayName = profile.displayName
-                this.pictureUrl = profile.pictureUrl
-                this.statusMessage = profile.statusMessage
-            }).catch(function (error) {
-                alert("Error getting profile: " + error);
-            });
-        },
-        
-
         async submit(){
             
             let data={};
             data.myMenu = this.myMenu;
             data.productImageUrl='https://reflectionsipc.files.wordpress.com/2017/07/aaeaaqaaaaaaaaxlaaaajdc5y2u4zddilwi3mjytndixos1intjklwi2mgu5zwvhm2ring1.jpg';
-            data.userLineId = this.userId;
+           
             let reqReserve = await this.$axios.$post('/api/reservePayment', {data});
             if(reqReserve.returnMessage == "Success.")
             {
                   location.href = reqReserve.info.paymentUrl.web;
             }else{
-                //alert("An Error occurred while calling LinePay_researvePayment API!!!");
+                
                 alert(reqReserve.returnMessage);
             }
           
@@ -210,13 +169,7 @@ export default{
                 {item.amount--; }
              }
             item.totalPrice = item.amount*item.price;
-        },
-        testGetTime(){
-             location.href = '/api/getTime';
         }
-
-        
-
     },
     
 

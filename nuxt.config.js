@@ -22,9 +22,6 @@ module.exports = {
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { hid: 'description', name: 'description', content: pkg.description }
       ],
-      // ===(1)開始===
-      script: [{ src: 'https://d.line-scdn.net/liff/1.0/sdk.js' }],
-      // ===(1)終了===
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
     },
 
@@ -53,13 +50,9 @@ module.exports = {
     "@/plugins/vuetify",
     ],
     modules: [
-       
       '@nuxtjs/axios',
- 
-    
     ],
     axios: {
-      // See https://github.com/nuxt-community/axios-module#options
       baseURL: API_URL
     },
     
