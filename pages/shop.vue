@@ -1,6 +1,2 @@
 
 <!-- for PC -->
-<template>
-    
-
-<template>

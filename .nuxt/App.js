@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import _6f6c098b from './layouts/default.vue'
+import _6f6c098b from '..\\layouts\\default.vue'
 
 const layouts = { "_default": _6f6c098b }
 
 export default {
-  head: {"title":"LinePayLiff","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Test Line Pay"}],"script":[{"src":"https:\u002F\u002Fd.line-scdn.net\u002Fliff\u002F1.0\u002Fsdk.js"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[]},
+  head: {"title":"LinePayLiff","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Test Line Pay"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"https:\u002F\u002Fuse.fontawesome.com\u002Freleases\u002Fv5.0.6\u002Fcss\u002Fall.css"},{"rel":"stylesheet","href":"https:\u002F\u002Fuse.fontawesome.com\u002Freleases\u002Fv5.0.6\u002Fcss\u002Fall.css"}],"style":[],"script":[]},
 
   render(h, props) {
     const loadingEl = h('nuxt-loading', { ref: 'loading' })

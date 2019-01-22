@@ -22,7 +22,9 @@ module.exports = {
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { hid: 'description', name: 'description', content: pkg.description }
       ],
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+      link: [{rel: 'icon', type: 'image/x-icon', href: 'https://use.fontawesome.com/releases/v5.0.6/css/all.css'}, {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'} ]
+      //<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+      //link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}, {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'} ]
     },
 
 
